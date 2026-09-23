@@ -1,13 +1,16 @@
 import type { Metadata } from 'next'
 import { ContactForm } from '@/components/contact-form'
 import { site } from '@/lib/site'
+import { getSiteSettings } from '@/sanity/lib/data'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: `Get in touch with ${site.name} for product design, editorial, and brand work.`,
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getSiteSettings()
+
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-14 md:grid-cols-[1fr_1.1fr] md:gap-20">
@@ -30,10 +33,10 @@ export default function ContactPage() {
               </dt>
               <dd className="mt-2">
                 <a
-                  href={`mailto:${site.email}`}
+                  href={`mailto:${settings.email}`}
                   className="font-serif text-xl tracking-tight text-foreground underline-offset-4 hover:underline"
                 >
-                  {site.email}
+                  {settings.email}
                 </a>
               </dd>
             </div>
@@ -41,16 +44,16 @@ export default function ContactPage() {
               <dt className="text-xs uppercase tracking-widest text-muted-foreground">
                 Based in
               </dt>
-              <dd className="mt-2 text-lg text-foreground">{site.location}</dd>
+              <dd className="mt-2 text-lg text-foreground">{settings.location}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-widest text-muted-foreground">
                 Elsewhere
               </dt>
               <dd className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                {site.socials.map((s) => (
+                {settings.socials.map((s) => (
                   <a
-                    key={s.label}
+                    key={`${s.href}-${s.label}`}
                     href={s.href}
                     target="_blank"
                     rel="noreferrer"

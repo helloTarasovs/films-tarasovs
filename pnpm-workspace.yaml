@@ -3,3 +3,13 @@ pmOnFail: ignore
 minimumReleaseAgeExclude:
   - '@next/*'
   - next
+  - '@sanity/access-ui@6.16.0'
+  - '@sanity/diff@6.16.0'
+  - '@sanity/mutator@6.16.0'
+  - '@sanity/schema@6.16.0'
+  - '@sanity/types@6.16.0'
+  - '@sanity/ui@4.2.3'
+  - '@sanity/util@6.16.0'
+  - '@sanity/validation@6.16.0'
+  - '@sanity/vision@6.16.0'
+  - sanity@6.16.0

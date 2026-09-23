@@ -44,7 +44,8 @@ export async function sanityFetch<T>({
           },
     )
   } catch (error) {
-    console.log('[v0] Sanity fetch failed:', (error as Error).message)
+    // Log only the message: never the client config or token.
+    console.error('[sanity] fetch failed, using fallback content:', (error as Error).message)
     return null
   }
 }

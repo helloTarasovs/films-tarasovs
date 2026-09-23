@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ProjectCard } from '@/components/project-card'
-import { projects } from '@/lib/site'
+import { getProjects } from '@/sanity/lib/data'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -8,7 +8,9 @@ export const metadata: Metadata = {
     'Selected product, editorial, and brand work — case studies in restraint and craft.',
 }
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects()
+
   return (
     <>
       <section className="border-b border-border/60">

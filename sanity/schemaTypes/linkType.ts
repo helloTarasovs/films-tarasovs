@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { validateHref } from './fields'
 
 export const linkType = defineType({
   name: 'navLink',
@@ -15,8 +16,15 @@ export const linkType = defineType({
       name: 'href',
       title: 'URL or path',
       type: 'string',
-      description: 'An internal path (e.g. /about) or a full URL.',
-      validation: (rule) => rule.required(),
+      description:
+        'An internal path (/about), a homepage section (/#projects, or #projects on the homepage only), a full URL (https://…), or a mailto: link.',
+      validation: (rule) => validateHref(rule).required(),
+    }),
+    defineField({
+      name: 'openInNewTab',
+      title: 'Open in new tab',
+      type: 'boolean',
+      initialValue: false,
     }),
   ],
   preview: {

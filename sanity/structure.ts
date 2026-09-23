@@ -1,6 +1,7 @@
 import type { StructureResolver } from 'sanity/structure'
 
-// Singletons for Site Settings and Home Page, plus a normal Projects list.
+// Singletons for Site Settings and Home Page (fixed document IDs, so opening
+// them always edits the same document), plus a normal Projects list.
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -16,5 +17,14 @@ export const structure: StructureResolver = (S) =>
         .id('homePage')
         .child(S.document().schemaType('homePage').documentId('homePage')),
       S.divider(),
-      S.documentTypeListItem('project').title('Projects'),
+      S.documentTypeListItem('project')
+        .title('Projects')
+        .child(
+          S.documentTypeList('project')
+            .title('Projects')
+            .defaultOrdering([
+              { field: 'orderRank', direction: 'asc' },
+              { field: 'year', direction: 'desc' },
+            ]),
+        ),
     ])

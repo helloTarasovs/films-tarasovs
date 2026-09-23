@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { linkTargetProps } from '@/lib/links'
 import type { LinkItem } from '@/sanity/lib/types'
 
 export function SiteHeader({
@@ -46,9 +47,10 @@ export function SiteHeader({
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li key={`${link.href}-${link.label}`}>
                 <Link
                   href={link.href}
+                  {...linkTargetProps(link)}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                   className={cn(
                     'relative text-sm tracking-wide text-muted-foreground transition-colors hover:text-foreground',
@@ -86,9 +88,10 @@ export function SiteHeader({
         <nav aria-label="Mobile" className="mx-auto w-full max-w-6xl px-6 py-4">
           <ul className="flex flex-col">
             {navLinks.map((link) => (
-              <li key={link.href} className="border-b border-border/40 last:border-b-0">
+              <li key={`${link.href}-${link.label}`} className="border-b border-border/40 last:border-b-0">
                 <Link
                   href={link.href}
+                  {...linkTargetProps(link)}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                   className={cn(
                     'flex items-center justify-between py-4 font-serif text-2xl tracking-tight text-muted-foreground transition-colors hover:text-foreground',

@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
+import { stegaClean } from 'next-sanity'
 import { getSiteSettings } from '@/sanity/lib/data'
 import './globals.css'
 
@@ -17,7 +18,8 @@ const fraunces = Fraunces({
 })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings()
+  // Clean draft-mode stega markers: these strings end up in <head>.
+  const settings = stegaClean(await getSiteSettings())
   return {
     title: {
       default: `${settings.title} — ${settings.role}`,
