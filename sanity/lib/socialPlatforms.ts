@@ -1,6 +1,8 @@
 /** Shared by the Studio schema and the frontend (label fallback). No deps. */
 export const socialPlatforms = [
   { title: 'Instagram', value: 'instagram' },
+  { title: 'Vimeo', value: 'vimeo' },
+  { title: 'YouTube', value: 'youtube' },
   { title: 'LinkedIn', value: 'linkedin' },
   { title: 'Are.na', value: 'arena' },
   { title: 'Read.cv', value: 'readcv' },

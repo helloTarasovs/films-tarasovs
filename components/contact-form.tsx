@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
 const fieldClass =
-  'w-full rounded-md border border-border/70 bg-card/40 px-4 py-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-primary/70 focus:ring-1 focus:ring-primary/40'
+  'w-full rounded-md border border-border/70 bg-card/40 px-4 py-3 text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-primary-text focus:ring-1 focus:ring-primary-text/40'
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -21,7 +21,7 @@ export function ContactForm() {
         role="status"
         className="rounded-lg border border-border/60 bg-card/40 p-8"
       >
-        <h2 className="font-serif text-2xl tracking-tight text-foreground">
+        <h2 className="font-display text-2xl tracking-tight text-foreground">
           Message received.
         </h2>
         <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">
@@ -94,7 +94,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+        className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
       >
         Send message
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

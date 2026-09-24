@@ -1,38 +1,28 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter } from 'next/font/google'
 import { stegaClean } from 'next-sanity'
-import { getSiteSettings } from '@/sanity/lib/data'
+import { getSiteContent } from '@/sanity/lib/data'
+import { display, mono, sans } from './fonts'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
-  display: 'swap',
-})
-
 export async function generateMetadata(): Promise<Metadata> {
-  // Clean draft-mode stega markers: these strings end up in <head>.
-  const settings = stegaClean(await getSiteSettings())
+  // <head> strings: strip draft-mode stega markers.
+  const { site } = stegaClean(await getSiteContent())
   return {
+    metadataBase: new URL(site.url),
     title: {
-      default: `${settings.title} — ${settings.role}`,
-      template: `%s — ${settings.title}`,
+      default: `${site.name}, ${site.role}`,
+      template: `%s · ${site.name}`,
     },
-    description: `Portfolio of ${settings.title}, ${settings.role.toLowerCase()} based in ${settings.location}. Editorial, product, and brand work.`,
-    generator: 'v0.app',
+    description:
+      'Directed films, made with AI. Product films, brand films, launch visuals and motion identity for brands, agencies and creative teams.',
+    alternates: { canonical: '/' },
   }
 }
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#161513',
+  themeColor: '#0f0b09',
 }
 
 export default function RootLayout({
@@ -41,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="min-h-dvh font-sans antialiased">
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <body className="min-h-dvh">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

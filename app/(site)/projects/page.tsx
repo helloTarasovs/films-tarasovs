@@ -18,7 +18,7 @@ export default async function ProjectsPage() {
           <p className="text-xs uppercase tracking-widest text-muted-foreground">
             Projects
           </p>
-          <h1 className="mt-8 max-w-3xl text-balance font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-7xl">
+          <h1 className="mt-8 max-w-3xl text-balance font-display text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-7xl">
             A decade of work, edited down to what still holds up.
           </h1>
           <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">

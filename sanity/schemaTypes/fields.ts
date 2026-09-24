@@ -33,3 +33,18 @@ export const altTextField = defineField({
       return true
     }),
 })
+
+/**
+ * Brand rule (docs/design-handoff/design-system/brand-book.md): no em dashes in
+ * copy. Use as `rule.custom(noEmDash).warning()` so it never blocks publishing.
+ */
+export function noEmDash(value: unknown) {
+  const text = Array.isArray(value) ? value.join(' ') : typeof value === 'string' ? value : ''
+  return text.includes('—') ? 'Avoid em dashes (—): use a comma, colon, full stop or ·' : true
+}
+
+/** Fields kept only so existing data isn't lost: hidden while empty. */
+export const legacyField = {
+  hidden: ({ value }: { value?: unknown }) => value === undefined || value === null || value === '',
+  description: 'Legacy field from the previous design. Not shown on the site; safe to clear.',
+}

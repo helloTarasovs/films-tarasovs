@@ -48,7 +48,7 @@ export default function AboutPage() {
           </p>
           <div className="mt-10 grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start md:gap-16">
             <div>
-              <h1 className="text-balance font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+              <h1 className="text-balance font-display text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
                 I build the thing and the thing that makes the thing.
               </h1>
               <div className="mt-8 space-y-6 text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -88,7 +88,7 @@ export default function AboutPage() {
 
       {/* Capabilities */}
       <section className="mx-auto w-full max-w-6xl px-6 py-16 md:py-24">
-        <h2 className="font-serif text-2xl tracking-tight text-foreground md:text-3xl">
+        <h2 className="font-display text-2xl tracking-tight text-foreground md:text-3xl">
           Capabilities
         </h2>
         <ul className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border/60 bg-border/60 sm:grid-cols-2 md:grid-cols-3">
@@ -106,7 +106,7 @@ export default function AboutPage() {
       {/* Timeline */}
       <section className="border-t border-border/60">
         <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-24">
-          <h2 className="font-serif text-2xl tracking-tight text-foreground md:text-3xl">
+          <h2 className="font-display text-2xl tracking-tight text-foreground md:text-3xl">
             Selected experience
           </h2>
           <ol className="mt-10 divide-y divide-border/60">
@@ -119,7 +119,7 @@ export default function AboutPage() {
                   {item.year}
                 </p>
                 <div>
-                  <h3 className="font-serif text-xl tracking-tight text-foreground md:text-2xl">
+                  <h3 className="font-display text-xl tracking-tight text-foreground md:text-2xl">
                     {item.role}
                     <span className="text-muted-foreground"> · {item.place}</span>
                   </h3>
@@ -134,7 +134,7 @@ export default function AboutPage() {
           <div className="mt-12">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-sm tracking-wide text-primary underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-2 text-sm tracking-wide text-primary-text underline-offset-4 hover:underline"
             >
               Work with me
             </Link>

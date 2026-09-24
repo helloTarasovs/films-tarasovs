@@ -1,15 +1,19 @@
 import type { Metadata } from 'next'
 import { ContactForm } from '@/components/contact-form'
-import { site } from '@/lib/site'
-import { getSiteSettings } from '@/sanity/lib/data'
+import { stegaClean } from 'next-sanity'
+import { getSiteContent } from '@/sanity/lib/data'
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: `Get in touch with ${site.name} for product design, editorial, and brand work.`,
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = stegaClean(await getSiteContent())
+  return {
+    title: 'Contact',
+    description: `Get in touch with ${site.name}, ${site.role}.`,
+  }
 }
 
 export default async function ContactPage() {
-  const settings = await getSiteSettings()
+  const { site } = await getSiteContent()
+  const socials = site.social.filter((s) => s.href && s.href !== '#')
 
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
@@ -18,7 +22,7 @@ export default async function ContactPage() {
           <p className="text-xs uppercase tracking-widest text-muted-foreground">
             Contact
           </p>
-          <h1 className="mt-8 text-balance font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <h1 className="mt-8 text-balance font-display text-4xl leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
             Let&apos;s talk about the work.
           </h1>
           <p className="mt-6 max-w-md text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -33,10 +37,10 @@ export default async function ContactPage() {
               </dt>
               <dd className="mt-2">
                 <a
-                  href={`mailto:${settings.email}`}
-                  className="font-serif text-xl tracking-tight text-foreground underline-offset-4 hover:underline"
+                  href={`mailto:${site.email}`}
+                  className="font-display text-xl tracking-tight text-foreground underline-offset-4 hover:underline"
                 >
-                  {settings.email}
+                  {site.email}
                 </a>
               </dd>
             </div>
@@ -44,14 +48,15 @@ export default async function ContactPage() {
               <dt className="text-xs uppercase tracking-widest text-muted-foreground">
                 Based in
               </dt>
-              <dd className="mt-2 text-lg text-foreground">{settings.location}</dd>
+              <dd className="mt-2 text-lg text-foreground">{site.location}</dd>
             </div>
+            {socials.length > 0 && (
             <div>
               <dt className="text-xs uppercase tracking-widest text-muted-foreground">
                 Elsewhere
               </dt>
               <dd className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                {settings.socials.map((s) => (
+                {socials.map((s) => (
                   <a
                     key={`${s.href}-${s.label}`}
                     href={s.href}
@@ -64,6 +69,7 @@ export default async function ContactPage() {
                 ))}
               </dd>
             </div>
+            )}
           </dl>
         </div>
 

@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { validateHref } from './fields'
+import { legacyField, noEmDash, validateHref } from './fields'
 
 export const siteSettingsType = defineType({
   name: 'siteSettings',
@@ -8,33 +8,38 @@ export const siteSettingsType = defineType({
   groups: [
     { name: 'general', title: 'General', default: true },
     { name: 'header', title: 'Header' },
-    { name: 'footer', title: 'Footer' },
-    { name: 'social', title: 'Social' },
+    { name: 'footer', title: 'Footer & social' },
   ],
   fields: [
     defineField({
       name: 'title',
-      title: 'Site name',
+      title: 'Name',
       type: 'string',
       group: 'general',
-      description:
-        'Shown as the wordmark in the header, in the copyright line, and in browser tab titles.',
+      description: 'The wordmark in the header and footer, e.g. "Yurii Tarasov". Also used in page titles.',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'role',
-      title: 'Role / tagline',
+      name: 'descriptor',
+      title: 'Descriptor',
       type: 'string',
       group: 'general',
-      description:
-        'e.g. "Design Engineer & Art Director". Used in the default page title and as the homepage eyebrow fallback.',
+      description: 'Small uppercase word after the name, e.g. "Films" (matches films.tarasovs.me).',
+    }),
+    defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'string',
+      group: 'general',
+      description: 'e.g. "AI film & motion director". Used in the footer and page titles.',
+      validation: (rule) => rule.custom(noEmDash).warning(),
     }),
     defineField({
       name: 'email',
       title: 'Contact email',
       type: 'string',
       group: 'general',
-      description: 'Shown in the footer and on the Contact page as a mailto: link.',
+      description: 'Shown large in the Contact section, with "Copy email".',
       validation: (rule) => rule.email(),
     }),
     defineField({
@@ -42,92 +47,54 @@ export const siteSettingsType = defineType({
       title: 'Location',
       type: 'string',
       group: 'general',
-      description: 'e.g. "Brooklyn, New York". Shown in the footer and Contact page.',
+      description: 'City shown in the footer fine print, e.g. "Timișoara".',
     }),
     defineField({
+      name: 'startProject',
+      title: '"Start a project" link',
+      type: 'navLink',
+      group: 'general',
+      description:
+        'Used by every "Start a project" button (header, hero, menu, contact). For now a mailto: link; later the brief form or a Calendly link.',
+    }),
+
+    defineField({
       name: 'navLinks',
-      title: 'Header navigation',
+      title: 'Navigation',
       type: 'array',
       group: 'header',
       description:
-        'Links in the top navigation. Also used for the footer "Pages" column unless Footer navigation is set.',
+        'Header, mobile menu and footer. Point to homepage sections: /#work, /#approach, /#about, /#contact.',
       of: [defineArrayMember({ type: 'navLink' })],
+      validation: (rule) => rule.max(5),
     }),
+
     defineField({
-      name: 'footerHeading',
-      title: 'Footer heading',
-      type: 'string',
+      name: 'agency',
+      title: 'Agency credit',
+      type: 'navLink',
       group: 'footer',
-      description: 'Large text at the top-left of the footer, e.g. "Have a project in mind?"',
-    }),
-    defineField({
-      name: 'footerCtaLabel',
-      title: 'Footer CTA label',
-      type: 'string',
-      group: 'footer',
-      description: 'Link text under the footer heading.',
-    }),
-    defineField({
-      name: 'footerCtaHref',
-      title: 'Footer CTA link',
-      type: 'string',
-      group: 'footer',
-      description: 'A path (/contact), a full URL, or a mailto: link.',
-      validation: (rule) => validateHref(rule),
-    }),
-    defineField({
-      name: 'footerNavHeading',
-      title: 'Footer navigation heading',
-      type: 'string',
-      group: 'footer',
-      description: 'Defaults to "Pages".',
-    }),
-    defineField({
-      name: 'footerNav',
-      title: 'Footer navigation',
-      type: 'array',
-      group: 'footer',
-      description: 'Leave empty to repeat the header navigation.',
-      of: [defineArrayMember({ type: 'navLink' })],
-    }),
-    defineField({
-      name: 'contactHeading',
-      title: 'Footer contact heading',
-      type: 'string',
-      group: 'footer',
-      description: 'Defaults to "Contact".',
-    }),
-    defineField({
-      name: 'copyrightText',
-      title: 'Copyright text',
-      type: 'string',
-      group: 'footer',
-      description:
-        'Shown after "© {current year}". Defaults to "{Site name}. All rights reserved."',
-    }),
-    defineField({
-      name: 'footerNote',
-      title: 'Footer note',
-      type: 'string',
-      group: 'footer',
-      description:
-        'Small text at the bottom-right of the footer. Defaults to "Designed & built in {Location}."',
-    }),
-    defineField({
-      name: 'socialsHeading',
-      title: 'Social links heading',
-      type: 'string',
-      group: 'social',
-      description: 'Footer column heading. Defaults to "Elsewhere".',
+      description: 'The one footer link to the agency, e.g. "Part of Tarasovs Digital Agency" → https://tarasovs.me.',
     }),
     defineField({
       name: 'socials',
       title: 'Social links',
       type: 'array',
-      group: 'social',
-      description: 'Shown in the footer and on the Contact page. Open in a new tab.',
+      group: 'footer',
+      description: 'Footer, right side. Up to three reads best (e.g. Instagram, Vimeo, LinkedIn).',
       of: [defineArrayMember({ type: 'socialLink' })],
     }),
+
+    // Legacy fields from the previous footer design. Hidden while empty.
+    defineField({ name: 'footerHeading', title: 'Footer heading', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'footerCtaLabel', title: 'Footer CTA label', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'footerCtaHref', title: 'Footer CTA link', type: 'string', group: 'footer', ...legacyField, validation: (rule) => validateHref(rule) }),
+    defineField({ name: 'footerNavHeading', title: 'Footer navigation heading', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'footerNav', title: 'Footer navigation', type: 'array', group: 'footer', of: [defineArrayMember({ type: 'navLink' })], ...legacyField }),
+    defineField({ name: 'contactHeading', title: 'Footer contact heading', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'socialsHeading', title: 'Social links heading', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'copyrightText', title: 'Copyright text', type: 'string', group: 'footer', ...legacyField }),
+    defineField({ name: 'footerNote', title: 'Footer note', type: 'string', group: 'footer', ...legacyField }),
   ],
   preview: {
     prepare: () => ({ title: 'Site Settings' }),

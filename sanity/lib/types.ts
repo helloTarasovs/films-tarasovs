@@ -11,17 +11,74 @@ export type SanityImageWithAlt = {
   alt?: string
 }
 
-export type LinkResult = {
-  label?: string
-  href?: string
-  openInNewTab?: boolean
+export type LinkResult = { label?: string; href?: string }
+
+export type SocialLinkResult = { platform?: string; label?: string; href?: string }
+
+export type FilmResult = {
+  _id: string
+  slug?: string
+  title?: string
+  category?: string
+  kind?: string
+  ratio?: string
+  runtime?: string
+  year?: string
+  summary?: string
+  role?: string
+  poster?: SanityImageWithAlt
+  previewUrl?: string
+  projectUrl?: string
 }
 
-export type SocialLinkResult = {
-  platform?: string
-  label?: string
-  href?: string
-}
+export type SiteSettingsQueryResult = {
+  title?: string
+  descriptor?: string
+  role?: string
+  email?: string
+  location?: string
+  startProject?: LinkResult
+  navLinks?: (LinkResult | null)[]
+  agency?: LinkResult
+  socials?: (SocialLinkResult | null)[]
+} | null
+
+export type HomePageQueryResult = {
+  heroLines?: string[]
+  heroIntro?: string
+  heroIntroMobile?: string
+  heroVideoUrl?: string
+  heroPoster?: SanityImageWithAlt
+  nowShowing?: { title?: string; category?: string; runtime?: string } | null
+  workHeading?: string
+  workHeadingContrast?: string
+  workNote?: string
+  workNoteMobile?: string
+  films?: (FilmResult | null)[]
+  phoneLabel?: string
+  archiveNote?: string
+  formatsHeading?: string
+  formatsHeadingContrast?: string
+  formatsNote?: string
+  formats?: ({ name?: string; description?: string; spec?: string[] } | null)[]
+  approachHeading?: string
+  approachHeadingContrast?: string
+  approachNote?: string
+  approachSteps?: ({ name?: string; line?: string } | null)[]
+  aboutLead?: string
+  aboutBody?: string
+  aboutPortrait?: SanityImageWithAlt
+  aboutFacts?: ({ label?: string; value?: string } | null)[]
+  contactLead?: string
+  contactResponse?: string
+  seoTitle?: string
+  seoDescription?: string
+  ogImage?: SanityImageWithAlt
+} | null
+
+export type FilmsQueryResult = FilmResult[] | null
+
+/* ------------------------------ /projects page ----------------------------- */
 
 export type ProjectResult = {
   _id: string
@@ -35,48 +92,7 @@ export type ProjectResult = {
   image?: SanityImageWithAlt
 }
 
-export type SiteSettingsQueryResult = {
-  title?: string
-  role?: string
-  email?: string
-  location?: string
-  navLinks?: LinkResult[]
-  footerHeading?: string
-  footerCtaLabel?: string
-  footerCtaHref?: string
-  footerNavHeading?: string
-  footerNav?: LinkResult[]
-  contactHeading?: string
-  copyrightText?: string
-  footerNote?: string
-  socialsHeading?: string
-  socials?: SocialLinkResult[]
-} | null
-
-export type HomePageQueryResult = {
-  heroEyebrow?: string
-  heroHeading?: string
-  heroParagraph?: string
-  primaryCta?: LinkResult
-  secondaryCta?: LinkResult
-  featuredHeading?: string
-  featuredLink?: LinkResult
-  statement?: string
-  featuredProjects?: (ProjectResult | null)[]
-  seoTitle?: string
-  seoDescription?: string
-  ogImage?: SanityImageWithAlt
-} | null
-
 export type ProjectsQueryResult = ProjectResult[] | null
-
-/* -------------------- Normalized data used by components ------------------ */
-
-export type LinkItem = {
-  label: string
-  href: string
-  openInNewTab?: boolean
-}
 
 export type ProjectItem = {
   slug: string
@@ -88,39 +104,4 @@ export type ProjectItem = {
   image: string
   imageAlt?: string
   featured?: boolean
-}
-
-export type SiteSettings = {
-  title: string
-  role: string
-  email: string
-  location: string
-  navLinks: LinkItem[]
-  socials: LinkItem[]
-  footerHeading: string
-  footerCtaLabel: string
-  footerCtaHref: string
-  footerNavHeading: string
-  footerNav: LinkItem[]
-  socialsHeading: string
-  contactHeading: string
-  copyrightText: string
-  footerNote: string
-}
-
-export type HomePageData = {
-  heroEyebrow: string
-  heroHeading: string
-  heroParagraph: string
-  primaryCta: LinkItem | null
-  secondaryCta: LinkItem | null
-  featuredHeading: string
-  featuredLink: LinkItem | null
-  statement: string
-  featuredProjects: ProjectItem[]
-  seo: {
-    title?: string
-    description?: string
-    ogImage?: { url: string; alt: string; width: number; height: number }
-  }
 }

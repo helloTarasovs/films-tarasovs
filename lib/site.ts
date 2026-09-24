@@ -11,11 +11,12 @@ export const site = {
   ],
 }
 
+// Landing page sections. Used until Header navigation is set in Sanity.
 export const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Approach', href: '/#approach' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export type Project = {

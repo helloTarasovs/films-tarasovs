@@ -1,71 +1,276 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+/* =====================================================================
+   Screening Room design tokens
+   Next.js + Tailwind CSS v4 + shadcn/ui. Dark-first, single theme.
+
+   Fonts (next/font/google, all with Cyrillic):
+     Cormorant     display + headings, weights 500, 600 (no italic)
+                    subsets: latin, latin-ext, cyrillic
+     Inter         UI + body, weights 400, 500
+                    subsets: latin, latin-ext, cyrillic
+     IBM Plex Mono metadata only, weight 400
+                    subsets: latin, cyrillic
+
+   // app/fonts.ts
+   // import { Cormorant, Inter, IBM_Plex_Mono } from "next/font/google";
+   // export const display = Cormorant({ subsets:["latin","cyrillic"], weight:["500","600"], variable:"--font-cormorant", display:"swap" });
+   // export const sans    = Inter({ subsets:["latin","cyrillic"], weight:["400","500"], variable:"--font-inter", display:"swap" });
+   // export const mono    = IBM_Plex_Mono({ subsets:["latin","cyrillic"], weight:["400"], variable:"--font-plex-mono", display:"swap" });
+
+   Contrast (WCAG 2.x, computed from the OKLCH values below):
+     foreground      on background 16.65 · card 15.58 · popover 14.21
+     fg-secondary    on background 11.01 · card 10.30 · popover  9.40
+     muted-fg        on background  7.04 · card  6.59 · popover  6.01
+     primary-text (light plum) on background 6.81 · card 6.37 · popover 5.81
+     primary-foreground (cream) on primary 5.55 · on hover 4.90 · on pressed 6.56
+     primary fill edge vs background 3.00 (non-text). NEVER use --primary as text.
+     destructive     on background  6.86 · success on background 9.55
+     input border (fg 40%) vs background 3.40  (non-text, ≥3:1)
+     ring (light plum)     vs background 6.81
+     hairlines (12–24%) are decorative only; never the sole affordance.
+     disabled text 3.55 is exempt under WCAG 1.4.3, always paired with a non-color cue.
+   ===================================================================== */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-fraunces);
-
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-}
-
-/* Dark editorial theme: warm near-black canvas, cream type, single amber accent */
 :root {
   color-scheme: dark;
-  --background: oklch(0.16 0.006 60);
-  --foreground: oklch(0.93 0.012 85);
-  --card: oklch(0.2 0.007 60);
-  --card-foreground: oklch(0.93 0.012 85);
-  --popover: oklch(0.2 0.007 60);
-  --popover-foreground: oklch(0.93 0.012 85);
-  --primary: oklch(0.8 0.13 72);
-  --primary-foreground: oklch(0.18 0.02 60);
-  --secondary: oklch(0.24 0.008 60);
-  --secondary-foreground: oklch(0.93 0.012 85);
-  --muted: oklch(0.24 0.008 60);
-  --muted-foreground: oklch(0.68 0.015 75);
-  --accent: oklch(0.8 0.13 72);
-  --accent-foreground: oklch(0.18 0.02 60);
-  --destructive: oklch(0.62 0.2 25);
-  --border: oklch(0.98 0.01 85 / 12%);
-  --input: oklch(0.98 0.01 85 / 15%);
-  --ring: oklch(0.8 0.13 72);
-  --radius: 0.5rem;
+
+  /* ---------- Raw palette (OKLCH, warm hue 60–85) ---------- */
+  --ink-0: oklch(0.120 0.010 60);   /* scrim black        #080503 */
+  --ink-1: oklch(0.155 0.008 60);   /* base               #0f0b09 */
+  --ink-2: oklch(0.195 0.009 60);   /* raised             #181411 */
+  --ink-3: oklch(0.235 0.010 60);   /* overlay            #221d19 */
+  --cream-1: oklch(0.945 0.018 85); /* text primary       #f2ece0 */
+  --cream-2: oklch(0.815 0.016 80); /* text secondary     #c8c2b7 */
+  --cream-3: oklch(0.690 0.014 75); /* text muted         #a19a92 */
+  --cream-4: oklch(0.520 0.010 70); /* disabled           #6d6863 */
+  --plum:         oklch(0.500 0.150 335); /* #943b84  fills */
+  --plum-hover:   oklch(0.530 0.155 335); /* #9f428f */
+  --plum-pressed: oklch(0.460 0.140 335); /* #853376 */
+  --plum-light:   oklch(0.700 0.150 340); /* #da76bb  text, rules, dots, focus */
+  --red:   oklch(0.700 0.150 28);  /* #ed7668 */
+  --green: oklch(0.760 0.120 150); /* #76c788 */
+
+  /* ---------- shadcn/ui semantic variables ---------- */
+  --background: var(--ink-1);
+  --foreground: var(--cream-1);
+  --card: var(--ink-2);
+  --card-foreground: var(--cream-1);
+  --popover: var(--ink-3);
+  --popover-foreground: var(--cream-1);
+  --primary: var(--plum);                  /* the one accent: button and chip FILLS */
+  --primary-foreground: var(--cream-1);    /* cream label on plum, 5.55:1 */
+  --secondary: var(--ink-3);
+  --secondary-foreground: var(--cream-1);
+  --muted: var(--ink-2);
+  --muted-foreground: var(--cream-3);
+  /* NOTE: in shadcn, --accent is the neutral hover surface for menu items,
+     selects and ghost buttons. It is NOT the brand accent. Plum lives on --primary. */
+  --accent: var(--ink-3);
+  --accent-foreground: var(--cream-1);
+  --destructive: var(--red);
+  --destructive-foreground: var(--ink-1);
+  --border: oklch(0.945 0.018 85 / 0.12);  /* hairline */
+  --input: oklch(0.945 0.018 85 / 0.40);   /* 3.40:1 on background */
+  --ring: var(--plum-light);
+  --radius: 0.25rem;
+
+  /* ---------- Extensions ---------- */
+  --fg-secondary: var(--cream-2);
+  --fg-disabled: var(--cream-4);
+  --primary-hover: var(--plum-hover);
+  --primary-pressed: var(--plum-pressed);
+  /* Plum as TEXT or a thin mark (links, eyebrow rule, active nav, dots).
+     The fill plum is only 3.00:1 on the page, so never use --primary as text. */
+  --primary-text: var(--plum-light);
+  --success: var(--green);
+  --border-strong: oklch(0.945 0.018 85 / 0.24);
+  --scrim: var(--ink-0);
+
+  /* Text over video: warm-black, eased, bottom-anchored.
+     Keep all copy inside the ≥62% band (bottom 40% of the frame).
+     Worst case (near-white peony pixel): foreground 5.35:1. Plum is never text on video;
+     plum buttons on video carry a 1px cream edge (the fill alone is 1.04:1 against the scrim). */
+  --scrim-bottom: linear-gradient(to top,
+    oklch(0.120 0.010 60 / 0.74) 0%,
+    oklch(0.120 0.010 60 / 0.62) 40%,
+    oklch(0.120 0.010 60 / 0.30) 60%,
+    oklch(0.120 0.010 60 / 0.08) 78%,
+    oklch(0.120 0.010 60 / 0) 90%);
+  --scrim-top: linear-gradient(to bottom,
+    oklch(0.120 0.010 60 / 0.50) 0%,
+    oklch(0.120 0.010 60 / 0) 100%);   /* 160px tall, header legibility */
+  --scrim-caption: oklch(0.120 0.010 60 / 0.70); /* solid chip behind small captions on video */
+
+  /* ---------- Layout ---------- */
+  --margin: clamp(1.25rem, 0.2286rem + 4.19vw, 4rem);       /* 20 → 64px */
+  --gutter: clamp(0.75rem, 0.4714rem + 1.143vw, 1.5rem);    /* 12 → 24px */
+  --container-text: 72rem;   /* 1152px */
+  --container-wide: 88rem;   /* 1408px */
+  --measure: 38rem;          /* running text, ~65ch */
+  --section-sm: clamp(4rem, 3.257rem + 3.048vw, 6rem);      /* 64 → 96 */
+  --section:    clamp(6rem, 4.514rem + 6.095vw, 10rem);     /* 96 → 160 */
+  --section-lg: clamp(8rem, 5.771rem + 9.143vw, 14rem);     /* 128 → 224 */
+  --header-h: 4rem;
+}
+
+/* ---------- Tailwind v4 theme ---------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-primary-text: var(--primary-text);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-disabled: var(--fg-disabled);
+  --color-scrim: var(--scrim);
+
+  --font-display: var(--font-cormorant), "Cormorant", "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Radius: sharp by default. */
+  --radius-media: 2px;
+  --radius-sm: 2px;
+  --radius-md: 4px;       /* buttons, inputs */
+  --radius-lg: 4px;
+  --radius-pill: 999px;   /* tags only */
+
+  --container-text: var(--container-text);
+  --container-wide: var(--container-wide);
+  --container-measure: var(--measure);
+  --spacing-section-sm: var(--section-sm);
+  --spacing-section: var(--section);
+  --spacing-section-lg: var(--section-lg);
+  --spacing-margin: var(--margin);
+  --spacing-gutter: var(--gutter);
+
+  /* Motion */
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);      /* long, soft settle, no overshoot */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);      /* UI state changes */
+  --ease-in-out-cine: cubic-bezier(0.65, 0, 0.35, 1); /* crossfades, poster → video */
+  --duration-hover: 180ms;
+  --duration-ui: 280ms;
+  --duration-reveal: 800ms;
+  --duration-media: 1400ms;
+  --stagger: 80ms;
+
+  --shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.6);
+
+  /* Fluid type scale: 390px → 1440px */
+  --text-display-xl: clamp(3.25rem, 0.9286rem + 9.524vw, 9.5rem);   /* 52 → 152 */
+  --text-display-xl--line-height: 0.92;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--font-weight: 500;
+
+  --text-display: clamp(2.75rem, 1.357rem + 5.714vw, 6.5rem);       /* 44 → 104 */
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.018em;
+  --text-display--font-weight: 500;
+
+  --text-h1: clamp(2.25rem, 1.414rem + 3.429vw, 4.5rem);            /* 36 → 72 */
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h1--font-weight: 500;
+
+  --text-h2: clamp(1.875rem, 1.364rem + 2.095vw, 3.25rem);          /* 30 → 52 */
+  --text-h2--line-height: 1.05;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 500;
+
+  --text-h3: clamp(1.5rem, 1.314rem + 0.7619vw, 2rem);              /* 24 → 32 */
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.005em;
+  --text-h3--font-weight: 600;
+
+  --text-h4: clamp(1.0625rem, 0.9929rem + 0.2857vw, 1.25rem);       /* 17 → 20, Inter */
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 500;
+
+  --text-body-l: clamp(1.125rem, 1.055rem + 0.2857vw, 1.3125rem);   /* 18 → 21 */
+  --text-body-l--line-height: 1.55;
+  --text-body-l--letter-spacing: -0.005em;
+
+  --text-body-m: clamp(1rem, 0.9768rem + 0.09524vw, 1.0625rem);     /* 16 → 17 */
+  --text-body-m--line-height: 1.6;
+
+  --text-body-s: clamp(0.875rem, 0.8518rem + 0.09524vw, 0.9375rem); /* 14 → 15 */
+  --text-body-s--line-height: 1.55;
+
+  --text-label: clamp(0.6875rem, 0.6643rem + 0.09524vw, 0.75rem);   /* 11 → 12, uppercase */
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.16em;
+  --text-label--font-weight: 500;
+
+  --text-caption: clamp(0.75rem, 0.7268rem + 0.09524vw, 0.8125rem); /* 12 → 13, mono */
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.02em;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  * { @apply border-border outline-ring; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { @apply bg-background text-foreground font-sans text-body-m; }
+  h1, h2, h3, .font-display { font-family: var(--font-display); font-feature-settings: "kern", "liga", "onum" 0; text-wrap: balance; }
+  h4 { font-family: var(--font-sans); }
+  .contrast { color: var(--fg-secondary); }   /* second phrase of a heading: same roman face, quieter color */
+  .label { font-family: var(--font-sans); font-size: var(--text-label); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; }
+  .meta  { font-family: var(--font-mono); font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: var(--plum); color: var(--cream-1); }
+}
+
+/* ---------- Utilities ---------- */
+@utility container-text { max-width: var(--container-text); margin-inline: auto; padding-inline: var(--margin); box-sizing: content-box; }
+@utility container-wide { max-width: var(--container-wide); margin-inline: auto; padding-inline: var(--margin); box-sizing: content-box; }
+@utility full-bleed { width: 100%; }
+@utility grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+@utility hairline { border-color: var(--border); border-width: 1px; }
+@utility media-frame {
+  position: relative; overflow: hidden; background: var(--ink-2);
+  border-radius: var(--radius-media); isolation: isolate;
+}
+@utility media-zoom {
+  & :is(video, img) { transition: transform var(--duration-media) var(--ease-cine); }
+  &:where(:hover, :focus-within) :is(video, img) { transform: scale(1.03); }
+}
+@utility scrim-bottom { background-image: var(--scrim-bottom); }
+@utility scrim-top { background-image: var(--scrim-top); }
+/* Primary button over footage: plum fill + cream edge so the shape holds on light video. */
+@utility btn-on-media { box-shadow: inset 0 0 0 1px oklch(0.945 0.018 85 / 0.7); }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;      /* keep color/opacity feedback, drop movement */
+    transition-property: color, background-color, border-color, opacity !important;
+    scroll-behavior: auto !important;
   }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: 'liga' 1, 'calt' 1;
-  }
-  ::selection {
-    background: oklch(0.8 0.13 72 / 30%);
-  }
+  [data-autoplay] { display: none; }            /* hero shows poster + "Play film" instead */
+  [data-poster-fallback] { display: block !important; }
 }

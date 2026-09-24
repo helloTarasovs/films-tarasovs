@@ -26,7 +26,7 @@ export function ProjectCard({
         />
       </div>
       <div className="mt-5 flex items-baseline justify-between gap-4">
-        <h3 className="font-serif text-2xl tracking-tight text-foreground md:text-3xl">
+        <h3 className="font-display text-2xl tracking-tight text-foreground md:text-3xl">
           <span className="mr-3 align-middle font-sans text-xs text-muted-foreground">
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -37,7 +37,7 @@ export function ProjectCard({
         )}
       </div>
       {project.category && (
-        <p className="mt-1 text-sm uppercase tracking-widest text-primary/90">
+        <p className="mt-1 text-sm uppercase tracking-widest text-primary-text">
           {project.category}
         </p>
       )}

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390">
+<title>Homepage reference, mobile 390</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&amp;family=IBM+Plex+Mono&amp;family=Inter:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="components.css">
+<style>
+:root{--background:oklch(0.155 0.008 60);--card:oklch(0.195 0.009 60);--popover:oklch(0.235 0.010 60);--foreground:oklch(0.945 0.018 85);--fg-secondary:oklch(0.815 0.016 80);--muted-foreground:oklch(0.690 0.014 75);--fg-disabled:oklch(0.520 0.010 70);--primary:oklch(0.500 0.150 335);--primary-hover:oklch(0.530 0.155 335);--primary-pressed:oklch(0.460 0.140 335);--primary-foreground:oklch(0.945 0.018 85);--primary-text:oklch(0.700 0.150 340);--secondary:oklch(0.235 0.010 60);--border:oklch(0.945 0.018 85 / 0.12);--border-strong:oklch(0.945 0.018 85 / 0.24);--input:oklch(0.945 0.018 85 / 0.40);--ring:oklch(0.700 0.150 340);--scrim:oklch(0.120 0.010 60);--font-display:"Cormorant",Georgia,serif;--font-sans:"Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,monospace}
+body{margin:0;background:var(--background)}
+.cap{font:400 12px/1.4 "IBM Plex Mono",monospace;color:var(--muted-foreground);letter-spacing:.02em}
+
+.swipe{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px;scrollbar-width:none}
+.swipe>div{flex:0 0 250px;scroll-snap-align:start;display:flex;flex-direction:column;gap:16px}
+.mfmt{display:grid;grid-template-columns:32px 1fr;column-gap:8px;row-gap:10px;padding:24px 0;border-top:1px solid var(--border)}
+.mfmt .idx{font:400 12px/1 "IBM Plex Mono",monospace;color:var(--muted-foreground);padding-top:14px}
+.mfmt h3{font:500 38px/1 "Cormorant",Georgia,serif;letter-spacing:-.01em;margin:0}
+.mfmt p{grid-column:2;margin:0;font:400 15px/1.55 "Inter",sans-serif;color:var(--fg-secondary)}
+.mfmt .sp{grid-column:2;font:400 12px/1.5 "IBM Plex Mono",monospace;color:var(--muted-foreground)}
+.mstep{display:grid;grid-template-columns:32px 1fr;gap:8px;padding:20px 0;border-top:1px solid var(--border-strong)}
+.mstep .n{font:400 12px/1 "IBM Plex Mono",monospace;color:var(--muted-foreground);padding-top:8px;margin:0}
+.mstep h3{font:600 24px/1.15 "Cormorant",Georgia,serif;margin:0 0 6px}
+.mstep p{margin:0;font:400 15px/1.5 "Inter",sans-serif;color:var(--fg-secondary)}
+.sr-caption .ttl{font-size:24px}
+
+</style>
+</head>
+<body>
+<div class="root" style="width: 390px; margin: 0 auto; background: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+
+<section class="sr-hero" style="height: 844px; padding: 0 20px 32px;">
+<div class="ft ft-peony" style="background-position: 30% center;"></div>
+<header class="sr-header sr-header--m sr-header--over" style="position: absolute; top: 0; left: 0; right: 0;">
+<a class="sr-brand" href="#" style="font-size: 20px;">Yurii Tarasov<span class="sr-brand-tag">Films</span></a><button class="sr-menu-btn" aria-expanded="false">Menu <i></i></button>
+</header>
+<p class="sr-nowshowing" style="position: absolute; top: 72px; left: 20px; margin: 0;"><span class="sr-dot"></span><b>Now showing</b> Bloom · 00:42</p>
+<h1 class="sr-display-xl" style="font-size: 54px; line-height: .94;">Directed films,<br>made with AI.</h1>
+<p class="sr-body-l" style="font-size: 17px; color: var(--foreground); margin-top: 18px;">Product and brand films for teams who want a picture people remember.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px;"><a class="sr-btn sr-btn--primary" href="#" style="padding: 0 12px;">View the work</a><a class="sr-btn sr-btn--on-media" href="#" style="padding: 0 12px;">Start a project</a></div>
+</section>
+
+<section style="padding: 96px 20px 0;">
+<header style="display: flex; flex-direction: column; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border);"><p class="sr-eyebrow">Selected work</p><h2 class="sr-h2" style="font-size: 34px;">Nine films. <span class="sr-contrast">Each one directed.</span></h2><p class="sr-body-s">Commissioned and self-initiated, 2024–2026. Tap to watch with sound.</p></header>
+</section>
+
+<section style="padding-top: 48px; display: flex; flex-direction: column; gap: 16px;">
+<a class="sr-frame sr-frame--239 " href="#" style="border-radius: 0;"><div class="ft ft-dusk"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> Watch · 01:24</span></a>
+<div style="padding: 0 20px;"><div class="sr-caption sr-caption--compact"><span class="idx">01</span><h3 class="ttl">Northlight</h3><div class="cat" style="grid-column: 2;">Launch film · 01:24 <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div></div>
+</section>
+
+<section style="padding: 96px 20px 0; display: flex; flex-direction: column; gap: 16px;">
+<a class="sr-frame sr-frame--169 " href="#" style=""><div class="ft ft-steel"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> Watch · 01:05</span></a>
+<div class="sr-caption sr-caption--compact"><span class="idx">02</span><h3 class="ttl">Glasshouse</h3><div class="cat" style="grid-column: 2;">Product film · 01:05 <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div>
+<div style="width: 62%; align-self: flex-end; margin-top: 40px; display: flex; flex-direction: column; gap: 16px;">
+<a class="sr-frame sr-frame--916 " href="#" style=""><div class="ft ft-coral"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> 0:15</span></a>
+<div class="sr-caption sr-caption--compact"><span class="idx">03</span><h3 class="ttl">Field Notes</h3><div class="cat" style="grid-column: 2;">Social series <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div>
+</div>
+</section>
+
+<section style="padding: 96px 20px 0; display: flex; flex-direction: column; gap: 20px;">
+<a class="sr-frame sr-frame--169 " href="#" style=""><div class="ft ft-sand"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> Watch · 02:10</span></a>
+<span class="cap">04 · Brand film · 2026</span>
+<h3 class="sr-h2" style="font-size: 34px;">Salt &amp; Silk</h3>
+<p class="sr-body-s">A textile house wanted its fabric to feel touched, not shown. Every shot follows light across the weave, cut to the rhythm of the loom.</p>
+<div style="display: flex; gap: 16px; align-items: center;"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a><span class="sr-tag">Self-initiated</span></div>
+</section>
+
+<section style="padding-top: 96px;">
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 20px 16px;"><p class="sr-eyebrow sr-eyebrow--plain">Made for the phone</p><span class="cap">Swipe · 1 / 3</span></div>
+<div class="swipe">
+<div><a class="sr-frame sr-frame--916 " href="#" style=""><div class="ft ft-night"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> 0:15</span></a><div class="sr-caption sr-caption--compact"><span class="idx">05</span><h3 class="ttl">Low Orbit</h3><div class="cat" style="grid-column: 2;">Launch teaser <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div></div>
+<div><a class="sr-frame sr-frame--916 " href="#" style=""><div class="ft ft-moss"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> 0:22</span></a><div class="sr-caption sr-caption--compact"><span class="idx">06</span><h3 class="ttl">Understory</h3><div class="cat" style="grid-column: 2;">Brand cutdown <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div></div>
+<div><a class="sr-frame sr-frame--916 " href="#" style=""><div class="ft ft-ink"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> 0:12</span></a><div class="sr-caption sr-caption--compact"><span class="idx">07</span><h3 class="ttl">Nocturne</h3><div class="cat" style="grid-column: 2;">Motion study <span class="sr-tag">Self-initiated</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div></div>
+</div>
+</section>
+
+<section style="padding-top: 128px; display: flex; flex-direction: column; gap: 16px;">
+<a class="sr-frame sr-frame--45 " href="#" style="border-radius: 0;"><div class="ft ft-peony"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> Watch · 00:42</span></a>
+<div style="padding: 0 20px;"><div class="sr-caption sr-caption--compact"><span class="idx">08</span><h3 class="ttl">Bloom</h3><div class="cat" style="grid-column: 2;">Motion identity · reframed 4:5 <span class="sr-tag">Self-initiated</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div></div>
+</section>
+
+<section style="padding: 96px 20px 0; display: flex; flex-direction: column; gap: 16px;">
+<a class="sr-frame sr-frame--169 " href="#" style=""><div class="ft ft-coral"></div><span class="sr-play"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"></path></svg> Watch · 01:30</span></a>
+<div class="sr-caption sr-caption--compact"><span class="idx">09</span><h3 class="ttl">Tidewater</h3><div class="cat" style="grid-column: 2;">Brand film · 01:30 <span class="sr-tag sr-tag--commissioned">Commissioned</span></div><div class="act"><a class="sr-link" href="#">Watch film <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a></div></div>
+<a class="sr-btn sr-btn--secondary" href="#" style="margin-top: 24px;">All work (10) <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"></path></svg></a>
+</section>
+
+<section style="padding: 128px 20px 0;">
+<header style="display: flex; flex-direction: column; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border);"><p class="sr-eyebrow">What I make</p><h2 class="sr-h2" style="font-size: 34px;">Five formats. <span class="sr-contrast">One way of directing.</span></h2><p class="sr-body-s">Each starts with a treatment and ends with a graded master.</p></header>
+<ol style="list-style: none; margin: 32px 0 0; padding: 0; border-bottom: 1px solid var(--border);">
+<li class="mfmt"><span class="idx">01</span><h3>Product films</h3><p>One object, lit and moved like it matters. For launches, product pages and paid.</p><span class="sp">16:9 · 2.39:1 · 0:30 – 1:30</span></li>
+<li class="mfmt"><span class="idx">02</span><h3>Brand films</h3><p>A mood and a point of view, carried by picture and sound rather than claims.</p><span class="sp">16:9 · 2.39:1 · 1:00 – 3:00</span></li>
+<li class="mfmt"><span class="idx">03</span><h3>Launch visuals</h3><p>Hero loops, keynote openers and stills cut from the same world.</p><span class="sp">16:9 · 4K loops · 0:06 – 0:30</span></li>
+<li class="mfmt"><span class="idx">04</span><h3>Social & vertical</h3><p>Cutdowns and native verticals, framed for the phone from the first shot.</p><span class="sp">9:16 · 4:5 · 0:06 – 0:45</span></li>
+<li class="mfmt"><span class="idx">05</span><h3>Motion identity</h3><p>Logo animation, idents and a motion language the brand can reuse.</p><span class="sp">16:9 · 1:1 · 0:03 – 0:15</span></li>
+</ol>
+</section>
+
+<section style="padding: 96px 20px 0;">
+<header style="display: flex; flex-direction: column; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border);"><p class="sr-eyebrow">Approach</p><h2 class="sr-h2" style="font-size: 34px;">Directed first. <span class="sr-contrast">Generated second.</span></h2><p class="sr-body-s">The tools change every month. The order of work does not.</p></header>
+<ol style="list-style: none; margin: 32px 0 0; padding: 0;">
+<li class="mstep"><p class="n">01</p><div><h3>Direction</h3><p>A written treatment and shot list before anything is generated.</p></div></li>
+<li class="mstep"><p class="n">02</p><div><h3>Visual development</h3><p>Look frames, characters and light, locked before any motion.</p></div></li>
+<li class="mstep"><p class="n">03</p><div><h3>Editing</h3><p>Cut for rhythm first, then for story, then for length.</p></div></li>
+<li class="mstep"><p class="n">04</p><div><h3>Sound</h3><p>Score, sound design and mix built to the picture, never added last.</p></div></li>
+<li class="mstep"><p class="n">05</p><div><h3>Finishing</h3><p>Upscale, grade and delivery masters for every placement.</p></div></li>
+</ol>
+</section>
+
+<section style="padding: 96px 20px 0; display: flex; flex-direction: column; gap: 20px;">
+<div style="padding-top: 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 112px 1fr; gap: 16px; align-items: end;">
+<div class="sr-frame sr-frame--45 sr-placeholder"><span>4:5</span></div>
+<p class="sr-eyebrow">About</p>
+</div>
+<p class="sr-h3" style="font-weight: 500; font-size: 26px;">I'm Yurii, a film and motion director working with AI as a camera, not a shortcut.</p>
+<p class="sr-body-s">Years in brand, web and motion design taught me to think about where a film will live as much as how it looks. I work with brands, agencies and creative teams.</p>
+<dl class="sr-facts">
+<div class="sr-fact" style="grid-template-columns: 104px 1fr; gap: 12px;"><dt>Based in</dt><dd>Timișoara, Romania</dd></div>
+<div class="sr-fact" style="grid-template-columns: 104px 1fr; gap: 12px;"><dt>Languages</dt><dd>English, Ukrainian, Russian</dd></div>
+</dl>
+</section>
+
+<section style="padding: 128px 20px 0;">
+<div class="sr-contact" style="gap: 20px;">
+<p class="sr-eyebrow">Contact</p>
+<p class="lead" style="font-size: 34px;">Have a film in mind?</p>
+<a class="sr-email" href="#" style="font-size: 42px; gap: 10px;">hello@tarasovs.me <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"></path></svg></a>
+<a class="sr-btn sr-btn--primary" href="#" style="margin-top: 12px;">Start a project</a>
+<div style="display: flex; justify-content: space-between; align-items: center;"><button class="sr-copy sr-link" type="button">Copy email</button><span class="sr-meta" style="font-size: 12px;">Replies in 2 working days</span></div>
+</div>
+<footer style="margin-top: 96px; padding: 28px 0 32px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 20px;">
+<a class="sr-brand" href="#">Yurii Tarasov<span class="sr-brand-tag">Films</span></a>
+<a class="sr-agency" href="https://tarasovs.me">Part of Tarasovs Digital Agency <svg class="sr-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"></path></svg></a>
+<nav aria-label="Footer" style="display: flex; gap: 20px; flex-wrap: wrap;"><a class="sr-body-s" href="#" style="text-decoration: none;">Work</a><a class="sr-body-s" href="#" style="text-decoration: none;">Approach</a><a class="sr-body-s" href="#" style="text-decoration: none;">About</a><a class="sr-body-s" href="#" style="text-decoration: none;">Contact</a></nav>
+<nav aria-label="Social" style="display: flex; gap: 20px;"><a class="sr-body-s" href="#" style="text-decoration: none;">Instagram</a><a class="sr-body-s" href="#" style="text-decoration: none;">Vimeo</a><a class="sr-body-s" href="#" style="text-decoration: none;">LinkedIn</a></nav>
+<div style="display: flex; justify-content: space-between;"><span class="sr-meta">© 2026 · Timișoara</span><a class="sr-link" href="#">Back to top</a></div>
+</footer>
+</section>
+
+</div>
+</body>
+</html>
