@@ -91,16 +91,16 @@ export default async function HomePage() {
       <section id="about" className="scroll-mt-16 py-section-sm">
         <div className="container-wide">
           <div className="grid-12 gap-y-8 border-t border-border pt-6">
-            <div className="col-span-4 md:col-span-3">
+            <div className="col-span-12 md:col-span-3">
               <MediaFrame
                 ratio="4:5"
                 poster={about.portrait}
                 title={`Portrait of ${site.name}`}
                 placeholderLabel="Portrait"
-                sizes="(min-width: 768px) 22vw, 33vw"
+                sizes="(min-width: 768px) 22vw, 100vw"
               />
             </div>
-            <div className="col-span-8 self-end md:hidden">
+            <div className="order-first col-span-12 md:hidden">
               <Eyebrow>{about.eyebrow}</Eyebrow>
             </div>
             <div className="col-span-12 md:col-span-4 md:col-start-5">
