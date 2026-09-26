@@ -9,6 +9,15 @@ import { PlayIcon } from './icons'
  * Muted hero loop. Poster (if any) shows until the video can play, then the
  * video crossfades in. With reduced motion it never autoplays: poster + "Play film".
  */
+/**
+ * Framing for the Napoleon loop: his hat sits at the very top of the frame, right
+ * of centre (~68%), in all three scenes. Anchor to the top so vertical cropping
+ * (viewports wider than 16:9) never cuts the hat; on portrait screens, where the
+ * sides are cropped instead, shift the focal point right to keep him in frame.
+ * Applied to the <video> (and its poster attribute) and the reduced-motion <img>.
+ */
+const framing = 'object-[68%_0%] landscape:object-[50%_0%]'
+
 export function HeroVideo({ src, poster }: { src: string; poster?: string }) {
   const ref = useRef<HTMLVideoElement>(null)
   const [ready, setReady] = useState(false)
@@ -33,7 +42,12 @@ export function HeroVideo({ src, poster }: { src: string; poster?: string }) {
     <div className="absolute inset-0">
       {poster && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img data-poster-fallback src={poster} alt="" className="absolute inset-0 size-full object-cover" />
+        <img
+          data-poster-fallback
+          src={poster}
+          alt=""
+          className={cn('absolute inset-0 size-full object-cover', framing)}
+        />
       )}
       <video
         ref={ref}
@@ -50,6 +64,7 @@ export function HeroVideo({ src, poster }: { src: string; poster?: string }) {
         onPlaying={() => setReady(true)}
         className={cn(
           'absolute inset-0 size-full object-cover transition-opacity duration-(--duration-media) ease-in-out-cine',
+          framing,
           ready || started ? 'opacity-100' : 'opacity-0',
         )}
       />
