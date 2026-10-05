@@ -12,7 +12,7 @@ import { getSiteContent } from '@/sanity/lib/data'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSiteContent()
-  const metadata: Metadata = {}
+  const metadata: Metadata = { alternates: { canonical: '/' } }
   if (seo.title) metadata.title = { absolute: seo.title }
   if (seo.description) metadata.description = seo.description
   if (seo.ogImage) {
@@ -26,8 +26,25 @@ export default async function HomePage() {
   const { site, hero, selectedWork, films, filmsArePlaceholders, formats, approach, about, contact } =
     await getSiteContent()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: `${site.name} ${site.descriptor ?? ''}`.trim(),
+    url: site.url,
+    description: site.role,
+    email: site.email,
+    founder: { '@type': 'Person', name: site.name, jobTitle: site.role },
+    address: { '@type': 'PostalAddress', addressLocality: site.location },
+    parentOrganization: { '@type': 'Organization', name: 'Tarasovs Digital Agency', url: 'https://tarasovs.me' },
+    sameAs: (site.social ?? []).map((s) => s.href).filter((h) => h?.startsWith('http')),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
       <Hero hero={hero} startProject={site.startProject} />
 
       <section id="work" className="scroll-mt-16 pt-section">

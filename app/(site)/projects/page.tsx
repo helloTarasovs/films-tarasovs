@@ -4,6 +4,8 @@ import { getProjects } from '@/sanity/lib/data'
 
 export const metadata: Metadata = {
   title: 'Projects',
+  alternates: { canonical: '/projects' },
+  robots: { index: false, follow: true }, // legacy template page
   description:
     'Selected product, editorial, and brand work — case studies in restraint and craft.',
 }

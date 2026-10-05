@@ -16,7 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description:
       'Directed films, made with AI. Product films, brand films, launch visuals and motion identity for brands, agencies and creative teams.',
-    alternates: { canonical: '/' },
+    openGraph: {
+      type: 'website',
+      siteName: site.name,
+      locale: 'en_US',
+      images: [{ url: '/portrait.png', alt: `${site.name}, ${site.role}` }],
+    },
+    twitter: { card: 'summary_large_image' },
   }
 }
 

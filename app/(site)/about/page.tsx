@@ -5,6 +5,8 @@ import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'About',
+  alternates: { canonical: '/about' },
+  robots: { index: false, follow: true }, // legacy template page
   description: `About ${site.name} — ${site.role}, based in ${site.location}.`,
 }
 

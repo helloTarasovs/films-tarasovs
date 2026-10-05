@@ -7,6 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { site } = stegaClean(await getSiteContent())
   return {
     title: 'Contact',
+    alternates: { canonical: '/contact' },
     description: `Get in touch with ${site.name}, ${site.role}.`,
   }
 }
