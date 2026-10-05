@@ -34,10 +34,10 @@ export const site = {
   url: 'https://films.tarasovs.me',
   role: 'AI film & motion director',
   email,
-  // Brief form / booking popup comes later; for now every "Start a project" opens mail.
+  // Every "Start a project" button goes to the contact page.
   startProject: {
     label: 'Start a project',
-    href: `mailto:${email}?subject=${encodeURIComponent('New project')}`,
+    href: '/contact',
   },
   agency: { label: 'Part of Tarasovs Digital Agency', href: 'https://tarasovs.me' },
   location: 'Timișoara',

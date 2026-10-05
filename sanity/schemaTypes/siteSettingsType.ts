@@ -55,7 +55,7 @@ export const siteSettingsType = defineType({
       type: 'navLink',
       group: 'general',
       description:
-        'Used by every "Start a project" button (header, hero, menu, contact). For now a mailto: link; later the brief form or a Calendly link.',
+        'Used by every "Start a project" button (header, hero, menu, contact). Defaults to /contact; can point to a brief form or a Calendly link.',
     }),
 
     defineField({

@@ -156,8 +156,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
       location: text(settings?.location, d.site.location),
       startProject: startProject ?? {
         label: d.site.startProject.label,
-        // Keep the default mail link pointed at the (possibly edited) address.
-        href: `mailto:${email}?subject=${encodeURIComponent('New project')}`,
+        href: d.site.startProject.href,
       },
       agency: agency ?? d.site.agency,
       social: socials.length ? socials : d.site.social,
