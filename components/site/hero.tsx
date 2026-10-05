@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import type { LinkValue, SiteContent } from '@/content/site'
+import { CtaLink } from './cta-link'
 import { HeroVideo } from './hero-video'
 
 type HeroContent = SiteContent['hero']
@@ -61,9 +62,9 @@ export function Hero({ hero, startProject }: { hero: HeroContent; startProject: 
                 <a href={hero.primary.href} className={cn(buttonVariants(), 'btn-on-media')}>
                   {hero.primary.label}
                 </a>
-                <a href={startProject.href} className={buttonVariants({ variant: 'onMedia' })}>
+                <CtaLink location="hero" href={startProject.href} className={buttonVariants({ variant: 'onMedia' })}>
                   {startProject.label}
-                </a>
+                </CtaLink>
               </div>
             </div>
           </div>

@@ -58,8 +58,20 @@ function toSocial(social: SocialLinkResult | null | undefined): LinkValue | null
 function toNav(link: LinkResult | null): NavItem | null {
   const value = toLink(link)
   if (!value) return null
+  // The contact page replaced the homepage #contact anchor; keep old Sanity values working.
+  const href = value.href === '/#contact' || value.href === '#contact' ? '/contact' : value.href
   // The section id drives the header's scroll-spy ("/#work" → "work").
-  return { ...value, id: value.href.split('#')[1] ?? value.href }
+  return { ...value, href, id: href.split('#')[1] ?? href }
+}
+
+/** Older Sanity values pointed at mailto:/#contact with "Start a project"; primary CTAs now open /contact. */
+function normalizeStartProject(link: LinkValue | null): LinkValue | null {
+  if (!link) return null
+  const legacyHref = link.href.startsWith('mailto:') || link.href === '#contact' || link.href === '/#contact'
+  return {
+    label: link.label.trim().toLowerCase() === 'start a project' ? 'Discuss your film' : link.label,
+    href: legacyHref ? '/contact' : link.href,
+  }
 }
 
 function compact<T>(items: (T | null | undefined)[] | null | undefined): T[] {
@@ -154,7 +166,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
       role: text(settings?.role, d.site.role),
       email,
       location: text(settings?.location, d.site.location),
-      startProject: startProject ?? {
+      startProject: normalizeStartProject(startProject) ?? {
         label: d.site.startProject.label,
         href: d.site.startProject.href,
       },

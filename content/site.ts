@@ -34,9 +34,9 @@ export const site = {
   url: 'https://films.tarasovs.me',
   role: 'AI film & motion director',
   email,
-  // Every "Start a project" button goes to the contact page.
+  // Every primary contact button goes to the contact page.
   startProject: {
-    label: 'Start a project',
+    label: 'Discuss your film',
     href: '/contact',
   },
   agency: { label: 'Part of Tarasovs Digital Agency', href: 'https://tarasovs.me' },
@@ -50,7 +50,7 @@ export const site = {
     { label: 'Work', href: '/#work', id: 'work' },
     { label: 'Approach', href: '/#approach', id: 'approach' },
     { label: 'About', href: '/#about', id: 'about' },
-    { label: 'Contact', href: '/#contact', id: 'contact' },
+    { label: 'Contact', href: '/contact', id: 'contact' },
   ],
 }
 

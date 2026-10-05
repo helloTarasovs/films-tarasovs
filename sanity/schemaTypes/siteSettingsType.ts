@@ -55,7 +55,7 @@ export const siteSettingsType = defineType({
       type: 'navLink',
       group: 'general',
       description:
-        'Used by every "Start a project" button (header, hero, menu, contact). Defaults to /contact; can point to a brief form or a Calendly link.',
+        'Used by every primary contact button (header, hero, menu, contact). Should be /contact.',
     }),
 
     defineField({
@@ -64,7 +64,7 @@ export const siteSettingsType = defineType({
       type: 'array',
       group: 'header',
       description:
-        'Header, mobile menu and footer. Point to homepage sections: /#work, /#approach, /#about, /#contact.',
+        'Header, mobile menu and footer. Point to homepage sections: /#work, /#approach, /#about, /contact.',
       of: [defineArrayMember({ type: 'navLink' })],
       validation: (rule) => rule.max(5),
     }),

@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import type { LinkValue, SiteContent } from '@/content/site'
+import { CtaLink } from './cta-link'
 import { Eyebrow } from './eyebrow'
 import { ArrowUpRight } from './icons'
 
@@ -54,9 +55,13 @@ export function ContactBlock({
         </a>
 
         <div className="mt-8 grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4 md:flex md:flex-wrap">
-          <a href={startProject.href} className={cn(buttonVariants(), 'col-span-2 w-full md:w-auto')}>
+          <CtaLink
+            location="contact-block"
+            href={startProject.href}
+            className={cn(buttonVariants(), 'col-span-2 w-full md:w-auto')}
+          >
             {startProject.label}
-          </a>
+          </CtaLink>
           <button
             type="button"
             onClick={copy}

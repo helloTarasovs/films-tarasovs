@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import type { SiteInfo } from '@/content/site'
+import { CtaLink } from './cta-link'
 import { Wordmark } from './wordmark'
 
 /**
@@ -88,12 +89,13 @@ export function Header({ site }: { site: SiteInfo }) {
           </nav>
 
           <div className="hidden justify-end lg:flex">
-            <a
+            <CtaLink
+              location="header"
               href={site.startProject.href}
               className={cn(buttonVariants({ size: 'sm' }), overMedia && 'btn-on-media')}
             >
               {site.startProject.label}
-            </a>
+            </CtaLink>
           </div>
 
           <MobileMenu site={site} active={active} />
@@ -147,9 +149,9 @@ function MobileMenu({ site, active }: { site: SiteInfo; active: string | null })
           </nav>
           <div className="mt-auto pt-6 pb-7">
             <div className="container-wide">
-              <a href={site.startProject.href} className={cn(buttonVariants(), 'w-full')}>
+              <CtaLink location="menu" href={site.startProject.href} className={cn(buttonVariants(), 'w-full')}>
                 {site.startProject.label}
-              </a>
+              </CtaLink>
             </div>
           </div>
         </Dialog.Popup>
