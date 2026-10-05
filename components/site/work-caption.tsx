@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import type { Film } from '@/content/site'
 import { Tag } from './tag'
-import { TextLink } from './text-link'
+import { WatchLink } from './watch-link'
 
 /**
  * Index, title, category line, tag and "Watch film" on a hairline under the frame.
@@ -19,7 +19,6 @@ export function WorkCaption({
   showRatio?: boolean
   className?: string
 }) {
-  const linked = film.href && film.href !== '#'
   const category = [film.category, showRatio && !compact ? film.ratio : null, film.runtime]
     .filter(Boolean)
     .join(' · ')
@@ -45,9 +44,7 @@ export function WorkCaption({
       {compact ? (
         <>
           <div className="col-start-2 mt-1">
-            <TextLink href={linked ? film.href : undefined} external>
-              {linked ? 'Watch film' : 'Film in edit'}
-            </TextLink>
+            <WatchLink slug={film.slug} />
           </div>
           <p className="col-start-2 mt-1 text-body-s text-fg-secondary">
             {film.category} · {film.ratio}
@@ -63,9 +60,7 @@ export function WorkCaption({
             <Tag value={film.tag} />
           </p>
           <div className="col-start-2 mt-2 md:col-start-3 md:row-span-2 md:row-start-1 md:mt-0 md:self-start">
-            <TextLink href={linked ? film.href : undefined} external>
-              {linked ? 'Watch film' : 'Film in edit'}
-            </TextLink>
+            <WatchLink slug={film.slug} />
           </div>
         </>
       )}

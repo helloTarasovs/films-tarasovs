@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import type { Ratio } from '@/content/site'
 import { PlayIcon } from './icons'
+import { useFilmLightbox } from './film-lightbox-provider'
 
 const ratioClass: Record<Ratio, string> = {
   '16:9': 'aspect-video',
@@ -28,7 +29,8 @@ export type MediaFrameProps = {
    *  60% in view (touch); without a poster it plays whenever in view. */
   preview?: string
   runtime?: string
-  href?: string
+  /** Film slug; opens the lightbox when the film is playable. */
+  slug?: string
   title: string
   sizes: string
   priority?: boolean
@@ -48,7 +50,7 @@ export function MediaFrame({
   poster,
   preview,
   runtime,
-  href,
+  slug,
   title,
   sizes,
   priority = false,
@@ -62,7 +64,8 @@ export function MediaFrame({
   const [playing, setPlaying] = useState(false)
 
   const hasMedia = Boolean(poster || preview)
-  const linked = Boolean(href && href !== '#')
+  const lightbox = useFilmLightbox()
+  const linked = Boolean(slug && lightbox?.canPlay(slug))
   const loading = wantsPlay && !playing
 
   // Touch devices, and previews without a poster, play while at least 60% visible.
@@ -88,6 +91,7 @@ export function MediaFrame({
   }, [wantsPlay])
 
   const hoverStart = () => {
+    if (linked) lightbox?.prefetch()
     if (!preview || !poster) return
     if (window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) setWantsPlay(true)
   }
@@ -150,19 +154,19 @@ export function MediaFrame({
 
   const events = { onMouseEnter: hoverStart, onMouseLeave: hoverEnd, onFocus: hoverStart, onBlur: hoverEnd }
 
-  if (linked) {
+  if (linked && slug) {
     return (
-      <a
-        ref={rootRef as React.RefObject<HTMLAnchorElement>}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        ref={rootRef as React.RefObject<HTMLButtonElement>}
+        onClick={(e) => lightbox?.open(slug, e.currentTarget)}
+        aria-haspopup="dialog"
         aria-label={`Watch ${title}${runtime ? `, ${runtime}` : ''}`}
-        className={frameClasses}
+        className={cn(frameClasses, 'w-full cursor-pointer text-left')}
         {...events}
       >
         {media}
-      </a>
+      </button>
     )
   }
   return (

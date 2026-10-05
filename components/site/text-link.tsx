@@ -2,8 +2,10 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { ArrowRight } from './icons'
 
-const base =
+export const textLinkBase =
   'group/link inline-flex items-center gap-2.5 border-b pb-1.5 text-[14px] leading-[1.2] font-medium tracking-[0.01em] whitespace-nowrap transition-colors duration-(--duration-hover) ease-standard'
+
+export const textLinkActive = 'border-border-strong text-foreground hover:border-primary-text hover:text-primary-text'
 
 /** Inline action with a hairline underline and an arrow that nudges on hover. */
 export function TextLink({
@@ -21,17 +23,13 @@ export function TextLink({
 }) {
   if (!href || href === '#') {
     return (
-      <span aria-disabled className={cn(base, 'cursor-not-allowed border-border text-fg-disabled', className)}>
+      <span aria-disabled className={cn(textLinkBase, 'cursor-not-allowed border-border text-fg-disabled', className)}>
         {children}
       </span>
     )
   }
 
-  const classes = cn(
-    base,
-    'border-border-strong text-foreground hover:border-primary-text hover:text-primary-text',
-    className,
-  )
+  const classes = cn(textLinkBase, textLinkActive, className)
   const content = (
     <>
       {children}

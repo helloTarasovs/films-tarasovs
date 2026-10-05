@@ -7,6 +7,7 @@ import { Hero } from '@/components/site/hero'
 import { MediaFrame } from '@/components/site/media-frame'
 import { ProcessStep } from '@/components/site/process-step'
 import { SectionHeader } from '@/components/site/section-header'
+import { FilmLightboxProvider } from '@/components/site/film-lightbox-provider'
 import { WorkSequence } from '@/components/site/work-sequence'
 import { getSiteContent } from '@/sanity/lib/data'
 
@@ -65,7 +66,9 @@ export default async function HomePage() {
         </div>
         <div className="mt-12 md:mt-20">
           {films.length > 0 ? (
-            <WorkSequence films={films} copy={selectedWork} />
+            <FilmLightboxProvider films={films}>
+              <WorkSequence films={films} copy={selectedWork} />
+            </FilmLightboxProvider>
           ) : (
             <p className="container-wide text-body-l text-fg-secondary">{selectedWork.empty}</p>
           )}

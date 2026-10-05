@@ -5,7 +5,7 @@ import { FactRow } from './fact-row'
 import { ArrowRight } from './icons'
 import { MediaFrame } from './media-frame'
 import { Tag } from './tag'
-import { TextLink } from './text-link'
+import { WatchLink } from './watch-link'
 import { VerticalRow } from './vertical-row'
 import { WorkCaption } from './work-caption'
 
@@ -74,9 +74,7 @@ export function WorkSequence({
                 <FactRow label="Runtime" value={`${split.runtime} · ${split.ratio}`} />
               </dl>
               <div className="mt-6 flex flex-wrap items-center gap-4">
-                <TextLink href={isLinked(split) ? split.href : undefined} external>
-                  {isLinked(split) ? 'Watch film' : 'Film in edit'}
-                </TextLink>
+                <WatchLink slug={split.slug} />
                 <Tag value={split.tag} />
               </div>
             </div>
@@ -122,16 +120,12 @@ export function WorkSequence({
   )
 }
 
-function isLinked(film: Film) {
-  return Boolean(film.href && film.href !== '#')
-}
-
 function frameProps(film: Film) {
   return {
     poster: film.poster,
     preview: film.preview,
     runtime: film.runtime,
-    href: film.href,
+    slug: film.slug,
     title: film.title,
   }
 }

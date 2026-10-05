@@ -50,7 +50,7 @@ export function VerticalRow({ films, label }: { films: Film[]; label: string }) 
                 poster={film.poster}
                 preview={film.preview}
                 runtime={film.runtime}
-                href={film.href}
+                slug={film.slug}
                 title={film.title}
                 sizes="(min-width: 768px) 30vw, 250px"
               />
