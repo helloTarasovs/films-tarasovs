@@ -1,14 +1,9 @@
 export const site = {
-  name: 'Aria Calloway',
-  role: 'Design Engineer & Art Director',
-  email: 'hello@ariacalloway.com',
-  location: 'Brooklyn, New York',
-  socials: [
-    { label: 'Instagram', href: 'https://instagram.com' },
-    { label: 'Are.na', href: 'https://are.na' },
-    { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'Read.cv', href: 'https://read.cv' },
-  ],
+  name: 'Yurii Tarasov',
+  role: 'AI film & motion director',
+  email: 'hello@tarasovs.me',
+  location: 'Timișoara, Romania',
+  socials: [{ label: 'Instagram', href: 'https://www.instagram.com/tarasovs.me/' }],
 }
 
 // Landing page sections. Used until Header navigation is set in Sanity.
