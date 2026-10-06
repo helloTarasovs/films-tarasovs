@@ -68,6 +68,29 @@ export function MediaFrame({
   const linked = Boolean(slug && lightbox?.canPlay(slug))
   const loading = wantsPlay && !playing
 
+  // Below-the-fold posters are not requested until they are close to the viewport, so
+  // they do not compete with the hero poster, fonts and scripts on the first load.
+  const [near, setNear] = useState(priority)
+  useEffect(() => {
+    if (near) return
+    const el = rootRef.current
+    if (!el || !('IntersectionObserver' in window)) {
+      setNear(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '300px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [near])
+
   // Touch devices, and previews without a poster, play while at least 60% visible.
   useEffect(() => {
     const el = rootRef.current
@@ -109,7 +132,7 @@ export function MediaFrame({
 
   const media = hasMedia ? (
     <>
-      {poster && (
+      {poster && near && (
         // Plain <img>: images.unoptimized means next/image would not build a srcset.
         // eslint-disable-next-line @next/next/no-img-element
         <img

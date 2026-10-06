@@ -303,3 +303,9 @@
   height: 100%;
   object-fit: contain;
 }
+
+/* Below-the-fold sections: skip style/layout/paint until they are near the viewport. */
+main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
