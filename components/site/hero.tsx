@@ -2,7 +2,9 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import type { LinkValue, SiteContent } from '@/content/site'
 import { CtaLink } from './cta-link'
-import { HeroVideo } from './hero-video'
+import { preload } from 'react-dom'
+import { HERO_WIDTHS, sanityImageAttrs } from '@/lib/sanity-srcset'
+import { HERO_POSTER_SIZES, HeroVideo } from './hero-video'
 
 type HeroContent = SiteContent['hero']
 
@@ -28,6 +30,12 @@ function NowShowing({ hero, className }: { hero: HeroContent; className?: string
 
 /** Full-screen loop; all copy in the bottom 40% over the eased warm-black scrim. */
 export function Hero({ hero, startProject }: { hero: HeroContent; startProject: LinkValue }) {
+  // Let the browser fetch the LCP poster from the HTML head, before any script runs.
+  if (hero.video.poster) {
+    const { src, srcSet } = sanityImageAttrs(hero.video.poster, HERO_WIDTHS)
+    preload(src, { as: 'image', imageSrcSet: srcSet, imageSizes: srcSet ? HERO_POSTER_SIZES : undefined, fetchPriority: 'high' })
+  }
+
   return (
     <section
       aria-label="Introduction"

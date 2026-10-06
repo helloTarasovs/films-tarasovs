@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { CARD_WIDTHS, sanityImageAttrs } from '@/lib/sanity-srcset'
 import type { Ratio } from '@/content/site'
 import { PlayIcon } from './icons'
 import { useFilmLightbox } from './film-lightbox-provider'
@@ -110,7 +110,17 @@ export function MediaFrame({
   const media = hasMedia ? (
     <>
       {poster && (
-        <Image src={poster} alt="" fill sizes={sizes} priority={priority} className="object-cover" />
+        // Plain <img>: images.unoptimized means next/image would not build a srcset.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          {...sanityImageAttrs(poster, CARD_WIDTHS)}
+          sizes={sizes}
+          alt=""
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : undefined}
+          decoding="async"
+          className="absolute inset-0 size-full object-cover"
+        />
       )}
       {preview && (
         <video

@@ -6,6 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Inline the (small, Tailwind) CSS so it is not render-blocking on first visit.
+  experimental: {
+    inlineCss: true,
+  },
   // Removed template pages; the content lives on the homepage.
   async redirects() {
     return [
