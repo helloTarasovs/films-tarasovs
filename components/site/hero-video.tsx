@@ -24,10 +24,9 @@ export const HERO_POSTER_SIZES = '100vw'
 
 type NetworkInformation = { saveData?: boolean; effectiveType?: string }
 
-/** Autoplaying the loop is worth 2 MB only on a wide screen with a decent connection. */
+/** The loop starts after load/idle, and only with a decent connection (phones included). */
 function canAutoplayVideo() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-  if (!window.matchMedia('(min-width: 768px)').matches) return false
   const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection
   if (connection?.saveData) return false
   if (connection?.effectiveType && /(^|-)(2g|3g)$/.test(connection.effectiveType)) return false
