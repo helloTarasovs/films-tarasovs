@@ -6,12 +6,12 @@ import { buttonVariants } from '@/components/ui/button'
 import { PlayIcon } from './icons'
 
 /**
- * Framing for the Napoleon loop: his hat sits at the very top of the frame, right
- * of centre (~68%), in all three scenes. Anchor to the top so vertical cropping
- * (viewports wider than 16:9) never cuts the hat; on portrait screens, where the
- * sides are cropped instead, shift the focal point right to keep him in frame.
+ * Centred horizontally (symmetry). Anchored to the top because the hat sits at the very
+ * top of the frame, so vertical cropping on wide viewports never cuts it. Note the subject
+ * is right of centre (~68%), so on portrait phones the centred strip may crop him; use
+ * object-[68%_0%] there if that matters.
  */
-const framing = 'object-[68%_0%] landscape:object-[50%_0%]'
+const framing = 'object-[50%_0%]'
 
 type NetworkInformation = { saveData?: boolean; effectiveType?: string }
 
@@ -41,6 +41,7 @@ export function HeroVideo({ src }: { src: string }) {
 
   return (
     <div className="absolute inset-0">
+      <div aria-hidden className="hero-bd" />
       {showVideo && (
         <video
           src={src}
