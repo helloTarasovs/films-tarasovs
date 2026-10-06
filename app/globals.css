@@ -271,8 +271,6 @@
     transition-property: color, background-color, border-color, opacity !important;
     scroll-behavior: auto !important;
   }
-  [data-autoplay] { display: none; }            /* hero shows poster + "Play film" instead */
-  [data-poster-fallback] { display: block !important; }
 }
 
 /* ---------- Film lightbox: Vidstack re-skinned to the Screening Room tokens ---------- */

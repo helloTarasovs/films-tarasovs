@@ -19,12 +19,17 @@ export const sans = Inter({
 });
 
 // Metadata only: indexes, runtimes, aspect ratios.
+// Above-the-fold label ("Now showing"), so the single latin file is preloaded and the
+// fallback is a monospace stack: every one of them is 0.6em wide like Plex Mono, so the
+// swap does not move anything.
 export const mono = IBM_Plex_Mono({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   weight: ["400"],
   variable: "--font-plex-mono",
   display: "swap",
-  preload: false,
+  preload: true,
+  fallback: ["ui-monospace", "Menlo", "Consolas", "monospace"],
+  adjustFontFallback: false,
 });
 
 // app/layout.tsx:
