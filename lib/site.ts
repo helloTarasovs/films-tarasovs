@@ -31,7 +31,7 @@ export const projects: Project[] = [
     year: '2025',
     summary:
       'A calm financial dashboard rethinking how people read their money. Warm, quiet, and legible under pressure.',
-    image: '/project-01.png',
+    image: '',
   },
   {
     slug: 'the-quarterly',
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     year: '2024',
     summary:
       'An independent print magazine on design and its discontents. Bold serifs, generous margins, ink on cream.',
-    image: '/project-02.png',
+    image: '',
   },
   {
     slug: 'lumen',
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     year: '2024',
     summary:
       'A nightly reflection app built around a single warm light. Interface design, prototyping, and micro-interactions.',
-    image: '/project-03.png',
+    image: '',
   },
   {
     slug: 'foundry',
@@ -58,6 +58,6 @@ export const projects: Project[] = [
     year: '2023',
     summary:
       'A full identity system for an independent type foundry — mark, stationery, and a living specimen site.',
-    image: '/project-04.png',
+    image: '',
   },
 ]

@@ -71,6 +71,21 @@ Environment variables:
 
 Real values live in `.env.local` and in the Vercel project settings, never in the repository.
 
+## Testing
+
+Unit and component tests run on **Vitest** with **React Testing Library** in a jsdom environment.
+
+```sh
+pnpm test         # run once
+pnpm test:watch   # re-run on save
+```
+
+What is covered:
+
+- **Contact form** (`components/contact-form.test.tsx`): field validation and focus on the first invalid field, the payload sent to Web3Forms, success and error states (rate limit, rejected submission, network failure), the guard against double submits, and the disabled state when no access key is set. Network calls and analytics are mocked.
+- **Responsive Sanity images** (`lib/sanity-srcset.test.ts`): `srcset` never upscales past the original width, keeps the aspect ratio and crop, and falls back safely for non-Sanity URLs.
+- **Class name helper** (`lib/utils.test.ts`).
+
 ## Credits
 
 Frontend development by [Vira Tarasova](https://www.linkedin.com/in/vira-tarasova-71860410a/).
