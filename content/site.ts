@@ -42,7 +42,7 @@ export const site = {
   agency: { label: 'Part of Tarasovs Digital Agency', href: 'https://tarasovs.me' },
   location: 'Timișoara',
   social: [
-    { label: 'Instagram', href: '#' }, // TODO
+    { label: 'Instagram', href: 'https://www.instagram.com/yuriitarasovaivideo' },
     { label: 'Vimeo', href: '#' }, // TODO
     { label: 'LinkedIn', href: '#' }, // TODO
   ],

@@ -3,7 +3,7 @@ export const site = {
   role: 'AI film & motion director',
   email: 'hello@tarasovs.me',
   location: 'Timișoara, Romania',
-  socials: [{ label: 'Instagram', href: 'https://www.instagram.com/tarasovs.me/' }],
+  socials: [{ label: 'Instagram', href: 'https://www.instagram.com/yuriitarasovaivideo' }],
 }
 
 // Landing page sections. Used until Header navigation is set in Sanity.
