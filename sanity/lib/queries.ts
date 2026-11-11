@@ -5,7 +5,7 @@ import { defineQuery } from 'next-sanity'
 const imageFields = `{ asset, crop, hotspot, alt }`
 
 // One film, as the homepage components need it.
-const filmFields = `{
+const filmFieldList = `
   _id,
   "slug": slug.current,
   title,
@@ -19,7 +19,8 @@ const filmFields = `{
   "poster": image${imageFields},
   previewUrl,
   projectUrl
-}`
+`
+const filmFields = `{${filmFieldList}}`
 
 export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings" && _id == "siteSettings"][0]{
   title,
@@ -82,3 +83,14 @@ export const projectsQuery = defineQuery(`*[_type == "project" && defined(slug.c
   featured,
   image${imageFields}
 }`)
+
+/** One project page: the film fields plus what only the project page shows. */
+export const projectBySlugQuery = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
+  ${filmFieldList},
+  client,
+  services,
+  "stills": gallery[]${imageFields},
+  "notes": description[]{ _key, style, "text": pt::text(@) }
+}`)
+
+export const projectSlugsQuery = defineQuery(`*[_type == "project" && defined(slug.current)].slug.current`)

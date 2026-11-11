@@ -31,6 +31,13 @@ export type FilmResult = {
   projectUrl?: string
 }
 
+export type ProjectDetailResult = FilmResult & {
+  client?: string
+  services?: string[]
+  stills?: (SanityImageWithAlt | null)[]
+  notes?: ({ _key?: string; style?: string; text?: string } | null)[]
+}
+
 export type SiteSettingsQueryResult = {
   title?: string
   descriptor?: string

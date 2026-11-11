@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { projectPath } from '@/lib/slug'
 import { cn } from '@/lib/utils'
 import type { Film } from '@/content/site'
 import { Tag } from './tag'
@@ -38,7 +40,9 @@ export function WorkCaption({
           compact ? 'text-[22px] md:text-[26px]' : 'md:text-[28px]',
         )}
       >
-        {film.title}
+        <Link href={projectPath(film.slug)} className="hover:text-primary-text focus-visible:text-primary-text">
+          {film.title}
+        </Link>
       </h3>
 
       {compact ? (

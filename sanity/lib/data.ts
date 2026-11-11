@@ -3,7 +3,16 @@ import { cache } from 'react'
 import { stegaClean } from 'next-sanity'
 import { sanityFetch } from './fetch'
 import { urlForImage } from './image'
-import { filmsQuery, homePageQuery, projectsQuery, siteSettingsQuery } from './queries'
+import { client } from './client'
+import { isSanityConfigured } from '../env'
+import {
+  filmsQuery,
+  homePageQuery,
+  projectBySlugQuery,
+  projectSlugsQuery,
+  projectsQuery,
+  siteSettingsQuery,
+} from './queries'
 import { socialPlatformTitle } from './socialPlatforms'
 import type {
   FilmResult,
@@ -11,6 +20,7 @@ import type {
   HomePageQueryResult,
   LinkResult,
   ProjectItem,
+  ProjectDetailResult,
   ProjectResult,
   ProjectsQueryResult,
   SanityImageWithAlt,
@@ -26,6 +36,7 @@ import {
   type SiteContent,
 } from '@/content/site'
 import { projects as fallbackProjects } from '@/lib/site'
+import { urlSlug } from '@/lib/slug'
 
 /*
  * Every value falls back field-by-field to content/site.ts, so the site stays
@@ -265,3 +276,58 @@ export async function getProjects(): Promise<ProjectItem[]> {
   const cleaned = compact((data || []).map(toProject))
   return cleaned.length ? cleaned : fallbackProjects
 }
+
+/* ------------------------------ Project page ------------------------------ */
+
+export type ProjectPageData = {
+  film: Film
+  client?: string
+  services: string[]
+  stills: { src: string; alt: string }[]
+  notes: { key: string; style: string; text: string }[]
+  prev: Film | null
+  next: Film | null
+}
+
+/** Slugs to prerender. Plain client call: generateStaticParams runs outside a request. */
+export async function getProjectSlugs(): Promise<string[]> {
+  if (!isSanityConfigured) return []
+  try {
+    return (await client.fetch<string[]>(projectSlugsQuery, {}, { stega: false })) || []
+  } catch (error) {
+    console.error('[sanity] project slugs failed:', (error as Error).message)
+    return []
+  }
+}
+
+/** `param` is the URL segment; the Sanity slug it came from may contain spaces or capitals. */
+export const getProjectPage = cache(async (param: string): Promise<ProjectPageData | null> => {
+  const wanted = urlSlug(decodeURIComponent(param))
+  const [{ films }, rawSlugs] = await Promise.all([getSiteContent(), getProjectSlugs()])
+  const slug = rawSlugs.find((s) => urlSlug(s) === wanted) ?? films.find((f) => urlSlug(f.slug) === wanted)?.slug
+  if (!slug) return null
+  const detail = await sanityFetch<ProjectDetailResult>({ query: projectBySlugQuery, params: { slug } })
+  const position = films.findIndex((f) => f.slug === slug)
+  const fromList = position >= 0 ? films[position] : null
+  const film = toFilm(detail, position >= 0 ? position : 0) ?? fromList
+  if (!film) return null
+  if (fromList) film.index = fromList.index
+
+  const stills = compact(detail?.stills).flatMap((image) => {
+    const src = imageUrl(image)
+    return src ? [{ src, alt: image.alt ?? '' }] : []
+  })
+  const notes = compact(detail?.notes).flatMap((b, i) =>
+    b.text?.trim() ? [{ key: b._key ?? String(i), style: stegaClean(b.style) ?? 'normal', text: b.text }] : [],
+  )
+
+  return {
+    film,
+    client: detail?.client || undefined,
+    services: compact(detail?.services),
+    stills,
+    notes,
+    prev: position > 0 ? films[position - 1] : null,
+    next: position >= 0 && position < films.length - 1 ? films[position + 1] : null,
+  }
+})

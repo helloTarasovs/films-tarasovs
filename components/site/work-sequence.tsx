@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { projectPath } from '@/lib/slug'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import type { Film, SiteContent } from '@/content/site'
@@ -64,7 +66,7 @@ export function WorkSequence({
                 {[split.index, split.category, split.year].filter(Boolean).join(' · ')}
               </p>
               <h3 className="mt-4 text-h2 transition-colors duration-(--duration-hover) ease-standard group-hover/work:text-primary-text">
-                {split.title}
+                <Link href={projectPath(split.slug)}>{split.title}</Link>
               </h3>
               {split.description && (
                 <p className="mt-5 max-w-measure text-body-m text-fg-secondary">{split.description}</p>
